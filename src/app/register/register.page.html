@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button  text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title slot="start">S'incrire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+        <div style="margin-top: 15px">
+          <center>
+          <ion-label style="margin: 0 15px 0 15px; text-align: center; font-family: 'Bookman Old Style'">Inscrivez-vous et accédez à tous services offerts</ion-label>
+          </center>
+            <form (ngSubmit)="onRegister()" class="custom-form">
+            <center>
+              <ion-avatar (click)="onLoadImageUser()" class="loadImgUser" style="cursor: cell">
+                <ion-icon name="camera-outline"></ion-icon>
+              </ion-avatar>
+            </center>
+            <div class="form-group" [ngClass]="{'not-empty' : prenom !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="prenom"  id="prenom" [(ngModel)]="prenom"/>
+              <label for="prenom" class="animated-label">Prénom(s)</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty' : nom !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="nom"  id="nom" [(ngModel)]="nom"/>
+              <label for="nom" class="animated-label">Nom</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty' : tel !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="tel"  id="tel" [(ngModel)]="tel"/>
+              <label for="tel" class="animated-label">Téléphone</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty' : email !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="email"  id="email" [(ngModel)]="email"/>
+              <label for="email" class="animated-label">Email</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty' : userName !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="user"  id="user" [(ngModel)]="userName"/>
+              <label for="user" class="animated-label">Nom d'utilisateur</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty': passWord !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="password" class="form-control" name="pass" id="pass" [(ngModel)]="passWord"/>
+              <label for="pass" class="animated-label">Mot de passe</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty': confpassWord !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="password" class="form-control" name="confpass" id="confpass" [(ngModel)]="confpassWord"/>
+              <label for="confpass" class="animated-label">Confirmer le mot de passe</label>
+            </div>
+            <div class="submit">
+              <button type="submit" style="border-radius: 3%; margin-top: 15px; width: 100%; height: 35px; background-color: #2fdf74; color: black; font-weight: bold">Enregistrer</button>
+            </div>
+          </form>
+        </div>
+</ion-content>

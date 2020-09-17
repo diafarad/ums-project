@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end" style="margin-right: 10px">
+      <ion-button (click)="onShareDocteur()">
+      <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="bgdocteurpage">
+    <center>
+    <ion-avatar style="margin-top: 23px; margin-bottom: 10px">
+      <ion-img [src]="currentDocteur.photo"></ion-img>
+    </ion-avatar>
+     <strong><ion-label>Dr. {{currentDocteur.nom}}</ion-label></strong>
+      <br>
+      <ion-label style="font-size: small">{{currentDocteur.fonction}}</ion-label>
+      <br>
+      <button (click)="onTakeRdv(currentDocteur)" style="border-radius: 8px; margin-top: 7px; height: 30px ;background-color: #00d1db">Prendre un rendez-vous</button>
+    </center>
+  </div>
+
+  <div>
+  <center>
+      <ion-card style="margin-top: 180px">
+        <ion-card-content>
+          <ion-item>
+            <h3>PROCHAINE DISPONIBILITÉ</h3>
+          </ion-item>
+          <ion-label>Lundi 21 Janvier 2020</ion-label>
+          <br>
+          <ion-label>Mardi 22 Janvier 2020</ion-label>
+          <br>
+          <ion-label>Mercredi 23 Janvier 2020</ion-label>
+        </ion-card-content>
+      </ion-card>
+  </center>
+  </div>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Urgence</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <center>
+    <ion-item style="border-bottom: 1px ridge">
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-label style="text-align: center">Votre position actuelle</ion-label>
+    </ion-item>
+  </center>
+  <agm-map  [(zoom)]="zoom" [latitude]="latitude" [longitude]="longitude">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+  <center>
+    <div class="labelPos">
+      <ion-label style="text-align: center; font-size: small">Précision : {{precision}} km</ion-label>
+    </div>
+  </center>
+
+  <ion-button class="myBtn" expand="full">Afficher les services de santé les plus proches</ion-button>
+
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-back-button  text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title slot="start">Prendre un RDV</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <center>
+    <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
+      <ion-avatar><ion-img src="{{checkDocteur.photo}}"></ion-img></ion-avatar>
+      <ion-label class="ion-text-wrap" style="text-align: center; margin-top: 0; margin-bottom: 0;">Dr. {{checkDocteur.nom}}</ion-label>
+    </ion-item>
+    <form>
+      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
+        <ion-icon name="location-outline"></ion-icon>
+        <ion-label class="ion-text-wrap" style="text-align: center; margin-top: 0; margin-bottom: 0;">Clinique Salam - Dakar</ion-label>
+      </ion-item>
+      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <ion-datetime min="{{ today }}" max="{{nextYear}}" displayFormat="DD MMMM YYYY" cancel-text="Annuler" done-text="Valider" placeholder="Sélectionner la date"></ion-datetime>
+      </ion-item>
+      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
+        <ion-icon name="time-outline"></ion-icon>
+        <ion-datetime min="08:00" max="16:00" displayFormat="HH:mm" cancel-text="Annuler" done-text="Valider" placeholder="Sélectionner l'heure"></ion-datetime>
+      </ion-item>
+      <ion-button type="submit" color="success" expand="full">Valider</ion-button>
+    </form>
+  </center>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Authentification</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <center>
+    <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
+      <div class="imgcontainer">
+        <img src="{{avatarImage}}" style="max-width: 100px; max-height: 100px"  alt="Avatar" class="avatar">
+      </div>
+
+      <div class="container">
+        <label ><b>Username</b></label>
+        <input type="text" placeholder="Entrer le login" name="username" ngModel required>
+
+        <label ><b>Mot de passe</b></label>
+        <input type="password" placeholder="Entrer le mot de passe" name="password" ngModel required>
+
+        <button type="submit">Se connecter</button>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Rester connecter
+        </label>
+      </div>
+
+      <div class="container" >
+        <ion-button expand="full" (click)="onRegister()" style="background-color: #3a7be0;">S'inscrire</ion-button>
+        <span class="psw">Mot de passe <a href="#">oublié?</a></span>
+      </div>
+    </form>
+  </center>
+</ion-content>
