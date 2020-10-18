@@ -11,37 +11,50 @@
 <ion-content>
         <div style="margin-top: 15px">
           <center>
+            <span class="text-danger mt-0">{{registerService.message}}</span>
           <ion-label style="margin: 0 15px 0 15px; text-align: center; font-family: 'Bookman Old Style'">Inscrivez-vous et accédez à tous services offerts</ion-label>
           </center>
-            <form (ngSubmit)="onRegister()" class="custom-form">
+            <form #f="ngForm" (ngSubmit)="onRegister(f.value)" class="custom-form">
             <center>
-              <ion-avatar (click)="onLoadImageUser()" class="loadImgUser" style="cursor: cell">
-                <ion-icon name="camera-outline"></ion-icon>
-              </ion-avatar>
+              <div>
+                <ion-avatar *ngIf="patient.photo == ''" (click)="onLoadImageUser()" class="loadImgUser" style="cursor: cell">
+                  <ion-icon name="camera-outline"></ion-icon>
+                </ion-avatar>
+              </div>
+              <img class="myimguserpic" *ngIf="patient.photo" (click)="onLoadImageUser()" [src]="patient.photo"/>
+              <ion-item *ngIf="error">
+                <ion-label>
+                  <strong>{{error}}</strong>
+                </ion-label>
+              </ion-item>
             </center>
-            <div class="form-group" [ngClass]="{'not-empty' : prenom !== ''}">
-              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="prenom"  id="prenom" [(ngModel)]="prenom"/>
+            <div class="form-group" [ngClass]="{'not-empty' : patient.prenom !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="prenom"  id="prenom" [(ngModel)]="patient.prenom"/>
               <label for="prenom" class="animated-label">Prénom(s)</label>
             </div>
-            <div class="form-group" [ngClass]="{'not-empty' : nom !== ''}">
-              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="nom"  id="nom" [(ngModel)]="nom"/>
+            <div class="form-group" [ngClass]="{'not-empty' : patient.nom !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="nom"  id="nom" [(ngModel)]="patient.nom"/>
               <label for="nom" class="animated-label">Nom</label>
             </div>
-            <div class="form-group" [ngClass]="{'not-empty' : tel !== ''}">
-              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="tel"  id="tel" [(ngModel)]="tel"/>
+            <div class="form-group" [ngClass]="{'not-empty' : patient.tel !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="tel"  id="tel" [(ngModel)]="patient.tel"/>
               <label for="tel" class="animated-label">Téléphone</label>
             </div>
-            <div class="form-group" [ngClass]="{'not-empty' : email !== ''}">
-              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="email"  id="email" [(ngModel)]="email"/>
+            <div class="form-group" [ngClass]="{'not-empty' : patient.adresse !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="adresse"  id="adresse" [(ngModel)]="patient.adresse"/>
+              <label for="adresse" class="animated-label">Adresse</label>
+            </div>
+            <div class="form-group" [ngClass]="{'not-empty' : patient.email !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="email"  id="email" [(ngModel)]="patient.email"/>
               <label for="email" class="animated-label">Email</label>
             </div>
-            <div class="form-group" [ngClass]="{'not-empty' : userName !== ''}">
-              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="user"  id="user" [(ngModel)]="userName"/>
-              <label for="user" class="animated-label">Nom d'utilisateur</label>
+            <div class="form-group" [ngClass]="{'not-empty' : patient.username !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="text" class="form-control" name="username"  id="username" [(ngModel)]="patient.username"/>
+              <label for="username" class="animated-label">Nom d'utilisateur</label>
             </div>
-            <div class="form-group" [ngClass]="{'not-empty': passWord !== ''}">
-              <input style="width: 100%; height: 35px; background-color: inherit" type="password" class="form-control" name="pass" id="pass" [(ngModel)]="passWord"/>
-              <label for="pass" class="animated-label">Mot de passe</label>
+            <div class="form-group" [ngClass]="{'not-empty': patient.password !== ''}">
+              <input style="width: 100%; height: 35px; background-color: inherit" type="password" class="form-control" name="password" id="password" [(ngModel)]="patient.password"/>
+              <label for="password" class="animated-label">Mot de passe</label>
             </div>
             <div class="form-group" [ngClass]="{'not-empty': confpassWord !== ''}">
               <input style="width: 100%; height: 35px; background-color: inherit" type="password" class="form-control" name="confpass" id="confpass" [(ngModel)]="confpassWord"/>

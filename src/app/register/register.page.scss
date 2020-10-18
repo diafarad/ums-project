@@ -7,12 +7,18 @@
   width: 50px;
 }
 
+.myimguserpic{
+  width: 100px;
+  height: 100px;
+  border: 1px ridge #4d4d4d;
+  border-radius: 50%;
+}
+
 ion-icon{
   font-size: 45px;
 }
 
 .custom-form {
-
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 16px;
@@ -104,4 +110,11 @@ ion-title {
 .myAlertBtn{
   text-transform: none;
 }
+
+.myAlertBtn1{
+  color : #f44336;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 

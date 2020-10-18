@@ -6,6 +6,7 @@
 
 <ion-content>
   <center>
+    <span class="text-danger mt-0">{{authService.message}}</span>
     <form #f="ngForm" (ngSubmit)="onLogin(f.value)">
       <div class="imgcontainer">
         <img src="{{avatarImage}}" style="max-width: 100px; max-height: 100px"  alt="Avatar" class="avatar">
@@ -13,10 +14,10 @@
 
       <div class="container">
         <label ><b>Username</b></label>
-        <input type="text" placeholder="Entrer le login" name="username" ngModel required>
+        <input type="text" placeholder="Entrer le login" [(ngModel)]="user.username" name="username" required>
 
         <label ><b>Mot de passe</b></label>
-        <input type="password" placeholder="Entrer le mot de passe" name="password" ngModel required>
+        <input type="password" placeholder="Entrer le mot de passe" [(ngModel)]="user.password" name="password" required>
 
         <button type="submit">Se connecter</button>
         <label>

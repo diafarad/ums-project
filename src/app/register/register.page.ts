@@ -9,40 +9,46 @@ import {RegisterService} from '../services/register.service';
   styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-  
-  private userName: string = '';
-  private passWord: string = '';
-  private confpassWord: string = '';
-  private prenom: string = '';
-  private nom: string = '';
-  private email: string = '';
-  private tel: string = '';
 
-  private iconPhoto = '<ion-icon name="camera-outline"></ion-icon>';
-  private iconGalery = '';
+  patient = {
+    username: '',
+    password: '',
+    email: '',
+    photo: '',
+    nom: '',
+    prenom: '',
+    dateNaiss: Date,
+    groupeSanguin: '',
+    tel: '',
+    adresse: '',
+  };
+  confpassWord = '';
+  public error: string | null = null;
+  message: string;
 
-  constructor(private camera: Camera, private alertCtrl: AlertController, private registerService: RegisterService) {  }
+  constructor(private camera: Camera,
+              private alertCtrl: AlertController,
+              private registerService: RegisterService) {
+  }
 
   ngOnInit() {
   }
 
-    async onLoadImageUser() {
+  async onLoadImageUser() {
       const option1: CameraOptions = {
-        quality: 50,
+        quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
-        sourceType: this.camera.PictureSourceType.CAMERA,
-        allowEdit: true
+        sourceType: this.camera.PictureSourceType.CAMERA
       };
 
       const option2: CameraOptions = {
-        quality: 50,
+        quality: 100,
         destinationType: this.camera.DestinationType.DATA_URL,
         encodingType: this.camera.EncodingType.JPEG,
         mediaType: this.camera.MediaType.PICTURE,
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        allowEdit: true
+        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
       };
 
       this.alertCtrl.create({
@@ -66,19 +72,49 @@ export class RegisterPage implements OnInit {
       }).then(res => {
         res.present();
       });
-    }
-
-  private getPicture(option: CameraOptions) {
-    this.camera.getPicture(option).then(imageData=>{
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      //this.currentLoc.photos.push(base64Image);
-      alert('Image : ' + base64Image);
-      //this.registerService.addPhoto(base64Image);
-    });
   }
 
-  onRegister() {
+  async getPicture(option: CameraOptions) {
+    this.camera.getPicture(option).then(imageData=>{
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.patient.photo = base64Image;
+      /*this.selectedFile = imageData;
+      this.selectedFile = imageData;
 
+      alert(imageData);
+      alert(base64Image);
+      console.log(imageData);
+      console.log(base64Image);*/
+
+    }).then(r=>r);
+  }
+
+  async onRegister(value) {
+    this.patient = value;
+    if(this.patient.password === this.confpassWord){
+      this.registerService.register(this.patient);
+    }
+    else{
+      this.showAlert();
+    }
+  }
+
+  async showAlert() {
+    this.alertCtrl.create({
+      mode: 'ios',
+      subHeader: 'Mots de passe non identiques!',
+      buttons: [
+        {
+          text: 'Mots de passe non identiques!',
+          cssClass: 'myAlertBtn1'
+        }
+      ]
+    }).then(res => {
+      res.present();
+      setTimeout(()=>{
+        res.dismiss();
+      }, 3000);
+    });
   }
 
 }

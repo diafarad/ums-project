@@ -59,6 +59,14 @@ const routes: Routes = [
     path: 'take-rdv',
     loadChildren: () => import('./take-rdv/take-rdv.module').then( m => m.TakeRDVPageModule)
   },
+  {
+    path: 'access-denied',
+    loadChildren: () => import('./access-denied/access-denied.module').then( m => m.AccessDeniedPageModule)
+  },
+  {
+    path: '**',
+    loadChildren: () => import('./page-not-found/page-not-found.module').then( m => m.PageNotFoundPageModule)
+  },
 ];
 
 @NgModule({
