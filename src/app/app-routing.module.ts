@@ -60,6 +60,10 @@ const routes: Routes = [
     loadChildren: () => import('./take-rdv/take-rdv.module').then( m => m.TakeRDVPageModule)
   },
   {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
     path: 'access-denied',
     loadChildren: () => import('./access-denied/access-denied.module').then( m => m.AccessDeniedPageModule)
   },

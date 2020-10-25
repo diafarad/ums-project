@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Profil</ion-title>
+    <ion-buttons slot="end" (click)="onEditProfil(patientProfil)">
+      <ion-icon name="create-outline"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="header">
+    <h4>{{patientProfil.prenom}} {{patientProfil.nom}}</h4>
+  </div>
+  <div class="flex">
+    <div class="border-blue">
+      <div class="border-white">
+        <div class="img-box">
+          <img src="../../assets/images/user.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <center>
+  <div class="usernameText">
+    <h6>@{{patientProfil.username}}</h6>
+  </div>
+  </center>
+
+  <ion-card *ngIf="patientProfil.nom" style="margin-bottom: 1px !important; margin-top: 1px !important;">
+    <ion-item>
+      <ion-icon name="text-outline"></ion-icon>
+      <ion-label><center>{{patientProfil.prenom}} {{patientProfil.nom}}</center></ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="patientProfil.dateNaiss" style="margin-bottom: 2px !important; margin-top: 1px !important;">
+    <ion-item>
+      <ion-icon name="calendar-outline"></ion-icon>
+      <ion-label><center>{{patientProfil.dateNaiss}}</center></ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="patientProfil.adresse" style="margin-bottom: 2px !important; margin-top: 1px !important;">
+    <ion-item>
+      <ion-icon name="location-outline"></ion-icon>
+      <ion-label><center>{{patientProfil.adresse}}</center></ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="patientProfil.tel" style="margin-bottom: 2px !important; margin-top: 1px !important;">
+    <ion-item>
+      <ion-icon name="call-outline"></ion-icon>
+      <ion-label><center>{{patientProfil.tel}}</center></ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="patientProfil.email" style="margin-bottom: 2px !important; margin-top: 1px !important;">
+    <ion-item>
+      <ion-icon name="mail-outline"></ion-icon>
+      <ion-label><center>{{patientProfil.email}}</center></ion-label>
+    </ion-item>
+  </ion-card>
+
+  <ion-card *ngIf="patientProfil.groupeSanguin" style="margin-bottom: 2px !important; margin-top: 1px !important;">
+    <ion-item>
+      <ion-icon name="water-outline"></ion-icon>
+      <ion-label><center>{{patientProfil.groupeSanguin}}</center></ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

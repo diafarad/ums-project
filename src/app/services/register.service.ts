@@ -12,7 +12,7 @@ export class RegisterService {
   public REST_API_SERVER = "http://localhost:8080";
   public message: string;
 
-  constructor(private router: Router, public http: HttpClient) { }
+  constructor(public http: HttpClient) { }
 
   public registerRequest(patient: any){
     return this.http.post<any>(this.REST_API_SERVER + "/registerPatient", patient, {observe:'response'});

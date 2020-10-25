@@ -6,13 +6,15 @@
   </ion-header>
 
   <ion-content>
-    <div class="bgmenu">
+    <div *ngIf="PatientProfile" class="bgmenu" (click)="onProfilePage(PatientProfile)">
+      <center>
         <ion-avatar>
-          <ion-img class="userimg" src="{{imgUser}}"></ion-img>
+          <ion-img class="userimg" src=""></ion-img>
         </ion-avatar>
-        <ion-label class="userTxt" style="margin-left: 8px">Administrateur</ion-label>
+        <ion-label class="userTxt">{{PatientProfile.prenom}} {{PatientProfile.nom}}</ion-label>
+      </center>
     </div>
-    <ion-menu-toggle autoHide="false" *ngFor="let p of pages">
+    <ion-menu-toggle autoHide=" " *ngFor="let p of pages">
       <ion-item (click)="onMenuAction(p)">
         <ion-icon [name]="p.icon" slot="start"></ion-icon>
         <ion-label>{{p.title}}</ion-label>
