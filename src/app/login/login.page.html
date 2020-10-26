@@ -1,10 +1,15 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Authentification</ion-title>
+    <ion-title style="font-size: smaller">Authentification</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-item>
+    <ion-icon slot="start" name="contrast-outline"></ion-icon>
+    <ion-toggle slot="end" [ngModel]="darkmode" (ionChange)="changeTheme()"></ion-toggle>
+  </ion-item>
   <center>
     <span class="text-danger mt-0">{{authService.message}}</span>
     <form #f="ngForm" (ngSubmit)="onLogin(f.value)">

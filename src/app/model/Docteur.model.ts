@@ -1,5 +1,5 @@
 export interface DocteurModel {
-    id : number,
+    id : number;
     nom: string;
     photo?: string;
     adresse: string;
