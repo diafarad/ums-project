@@ -35,6 +35,10 @@ const routes: Routes = [
       {
         path: 'takerdv',
         loadChildren: () => import('../take-rdv/take-rdv.module').then( m => m.TakeRDVPageModule)
+      },
+      {
+        path: 'rate-doctor',
+        loadChildren: () => import('../rate-doctor/rate-doctor.module').then( m => m.RateDoctorPageModule)
       }
     ]
   }

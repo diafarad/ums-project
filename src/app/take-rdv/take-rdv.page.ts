@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {TakeRDVService} from '../services/take-rdv.service';
 import {DocteurModel} from '../model/Docteur.model';
-import {getLocaleDateFormat} from '@angular/common';
 import {DocteurService} from '../services/docteur.service';
 
 @Component({
@@ -11,6 +8,7 @@ import {DocteurService} from '../services/docteur.service';
   styleUrls: ['./take-rdv.page.scss'],
 })
 export class TakeRDVPage implements OnInit {
+  private coverImg = '../../assets/images//imgMedCov.jpg';
   private checkDocteur: DocteurModel ;
   today: String = new Date().toISOString();
   d = new Date();

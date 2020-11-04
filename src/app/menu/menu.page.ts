@@ -19,6 +19,7 @@ export class MenuPage implements OnInit {
   public imgBG = '../assets/images/medecine.jpg';
   public imgUser = '../assets/images/user.png';
   public userName : string;
+  darkmode : boolean = true;
   public PatientProfile : PatientProfileModel = {
       id : 0,
       prenom: '',
@@ -42,8 +43,16 @@ export class MenuPage implements OnInit {
 
   constructor(private router: Router, private authService: AuthentificationService) {
       this.userName = localStorage.getItem('username');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+      this.darkmode = prefersDark.matches;
       //console.log('Le nom User : '+this.userName);
   }
+
+    changeTheme(){
+        //const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+        this.darkmode = ! this.darkmode;
+        document.body.classList.toggle('dark');
+    }
 
   ngOnInit() {
   }

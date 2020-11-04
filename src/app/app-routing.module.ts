@@ -64,6 +64,10 @@ const routes: Routes = [
     loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
+    path: 'rate-doctor',
+    loadChildren: () => import('./rate-doctor/rate-doctor.module').then( m => m.RateDoctorPageModule)
+  },
+  {
     path: 'access-denied',
     loadChildren: () => import('./access-denied/access-denied.module').then( m => m.AccessDeniedPageModule)
   },

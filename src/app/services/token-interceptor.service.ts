@@ -19,7 +19,7 @@ export class TokenInterceptorService implements HttpInterceptor{
     const token = localStorage.getItem('token');
     console.log(token);
     if(token !== 'undefined' && token !== null){
-      console.log('dffffffffffffffff');
+      console.log('Token is ok');
       req = req.clone(
           {
             setHeaders :{

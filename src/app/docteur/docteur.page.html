@@ -4,14 +4,14 @@
       <ion-back-button text=""></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end" style="margin-right: 10px">
-      <ion-button (click)="onShareDocteur()">
-      <ion-icon name="share-social-outline"></ion-icon>
+      <ion-button (click)="onRate(currentDocteur)">
+          <ion-icon name="star-half-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="text-align: center">
   <div class="bgdocteurpage">
     <center>
     <ion-avatar style="margin-top: 23px; margin-bottom: 10px">
@@ -24,19 +24,23 @@
       <button (click)="onTakeRdv(currentDocteur)" style="border-radius: 8px; margin-top: 7px; height: 30px ;background-color: #00d1db">Prendre un rendez-vous</button>
     </center>
   </div>
-
-  <div>
-  <center>
-      <ion-card style="margin-top: 180px; border-bottom: ridge 1px">
-        <center>
-          <p style="font-family: 'Bookman Old Style'; font-size: small; text-align: center;">
+    <center>
+        <div style="border-bottom: ridge 1px;">
+            <ion-label style="font-family: 'Bookman Old Style'; font-size: small; text-align: center;">
             PROCHAINE DISPONIBILITÉ
-          </p>
-        </center>
-      </ion-card>
-      <ion-card style="margin-bottom: 5px" *ngFor="let j of array">
+            </ion-label>
+        </div>
+
+      <ion-card style="margin-bottom: 5px" *ngFor="let j of arrayDispo">
         {{j}}
       </ion-card>
+
+        <form #form="ngForm" style="display: inline-block">
+            <bar-rating name="rating" (ratechange)="onRate(currentDocteur)" [rate]="formRating" [theme]="'stars'" [(ngModel)]="formRating" [max]="5" [titles]="['Bad', 'Mediocre' , 'Good', 'Awesome', 'Ok']"></bar-rating>
+        </form>
+        <pre>{{ formRating }}</pre>
+        <p>form is valid: {{ form.valid ? 'true' : 'false' }}</p>
   </center>
-  </div>
+
+
 </ion-content>

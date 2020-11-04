@@ -71,12 +71,10 @@ export class AuthentificationService {
   public loadToken(){
     let token = localStorage.getItem("token");
     let username = localStorage.getItem("username");
-    this.authentificate = token !== null && username !== null && token !== '';
+    console.log('TOKEN : '+token);
+    console.log('USERNAME : '+username);
+    this.authentificate = token !== null && username !== null && token !== 'undefined';
     return this.authentificate;
-  }
-
-  public getToken(){
-
   }
 
   logout() {

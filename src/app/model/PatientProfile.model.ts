@@ -1,5 +1,5 @@
 export interface PatientProfileModel{
-    id: number,
+    id: number;
     nom: string;
     prenom: string;
     dateNaiss: Date;
@@ -10,4 +10,5 @@ export interface PatientProfileModel{
     password: string;
     email?: string;
     photo?: string;
+    blob?:string;
 }

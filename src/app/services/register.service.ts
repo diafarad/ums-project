@@ -36,4 +36,16 @@ export class RegisterService {
           console.log(err);
         });
   }
+
+  uploadImgPhoto(uploadImageData) {
+      this.http.post(this.REST_API_SERVER +"/image/upload", uploadImageData, { observe: 'response' })
+          .subscribe((response) => {
+                  if (response.status === 200) {
+                      this.message = 'Image uploaded successfully';
+                  } else {
+                      this.message = 'Image not uploaded successfully';
+                  }
+              }
+          );
+  }
 }

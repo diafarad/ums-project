@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button  text=""></ion-back-button>
+    </ion-buttons>
+
+    <ion-title slot="start" style="font-size: small">NOTE</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="background" style="text-align: center">
+  <div style="margin-top: 100px">
+    <center>
+      <ion-avatar style="margin-top: 23px; margin-bottom: 10px">
+        <ion-img [src]="currentDocteur.photo"></ion-img>
+      </ion-avatar>
+      <strong><ion-label style="color: white">Dr. {{currentDocteur.nom}}</ion-label></strong>
+      <br>
+      <ion-label style="font-size: small; color: white">{{currentDocteur.fonction}}</ion-label>
+      <br>
+    </center>
+
+    <form #form="ngForm" style="display: inline-block">
+      <bar-rating name="rating" (ratechange)="onRate(currentDocteur)" [rate]="formRating" [theme]="'stars'" [(ngModel)]="formRating" [max]="5" [titles]="['Bad', 'Mediocre' , 'Good', 'Awesome', 'Ok']"></bar-rating>
+      <button (click)="rateDocteur(currentDocteur,formRating)" style="border-radius: 8px; margin-top: 7px; height: 30px ;background-color: #00d1db">Valider</button>
+    </form>
+  </div>
+
+</ion-content>

@@ -1,11 +1,8 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
-import {AlertController, LoadingController, ToastController} from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {AlertController} from '@ionic/angular';
 import {RegisterService} from '../services/register.service';
-import {Observable, throwError} from 'rxjs';
-import {catchError, finalize} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../environments/environment';
+import {Camera, CameraOptions} from '@ionic-native/camera/ngx';
+import {ProfileModel} from '../model/Profile';
 
 @Component({
   selector: 'app-register',
@@ -21,172 +18,94 @@ export class RegisterPage implements OnInit {
     photo: '',
     nom: '',
     prenom: '',
-    dateNaiss: Date,
+    dateNaiss: '',
     groupeSanguin: '',
     tel: '',
     adresse: '',
+    blob: '',
+    registerAt: ''
   };
   confpassWord = '';
   message: string;
-  public myPhoto: any;
-  private loading: any;
+  selectedFile: File;
   public error: string | null = null;
+  private image64:any;
 
-  constructor(private camera: Camera,
-              private alertCtrl: AlertController,
-              private registerService: RegisterService,
-              private readonly loadingCtrl: LoadingController,
-              private readonly toastCtrl: ToastController,
-              private readonly http: HttpClient,
-              private readonly changeDetectorRef: ChangeDetectorRef) {
+  constructor(private alertCtrl: AlertController,
+              private camera: Camera,
+              private registerService: RegisterService) {
   }
 
   ngOnInit() {
   }
 
   async onLoadImageUser() {
-      const option1: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        sourceType: this.camera.PictureSourceType.CAMERA
-      };
-
-      const option2: CameraOptions = {
-        quality: 100,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        encodingType: this.camera.EncodingType.JPEG,
-        mediaType: this.camera.MediaType.PICTURE,
-        sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-      };
-
-      this.alertCtrl.create({
-        mode: 'ios',
-        buttons: [
-          {
-            text: 'Prendre une photo',
-            cssClass: 'myAlertBtn',
-            handler: () => {
-              this.camera.getPicture(option1).then(imageData=>{
-                this.myPhoto = this.convertFileSrc(imageData);
-                this.patient.photo = this.myPhoto;
-                this.changeDetectorRef.detectChanges();
-                this.changeDetectorRef.markForCheck();
-                this.uploadPhoto(imageData);
-              }, (error: any) => this.error = JSON.stringify(error));
-            }
-          },
-          {
-            text: 'Choisir depuis la galerie',
-            cssClass: 'myAlertBtn',
-            handler: () => {
-              this.camera.getPicture(option2).then(imageData=>{
-                this.myPhoto = this.convertFileSrc(imageData);
-                this.patient.photo = this.myPhoto;
-                this.uploadPhoto(imageData);
-              }, (error: any) => this.error = JSON.stringify(error));
-            }
-          }
-        ]
-      }).then(res => {
-        res.present();
-      });
-  }
-
-  /*async getPicture(option: CameraOptions) {
-    this.camera.getPicture(option).then(imageData=>{
-      this.myPhoto = this.convertFileSrc(imageData);
-      this.changeDetectorRef.detectChanges();
-      this.changeDetectorRef.markForCheck();
-      this.uploadPhoto(imageData);
-    }, (error: any) => this.error = JSON.stringify(error));
-  }*/
-
-  private convertFileSrc(url: string): string {
-    if (!url) {
-      return url;
-    }
-    if (url.startsWith('/')) {
-      // @ts-ignore
-      return window.WEBVIEW_SERVER_URL + '/_app_file_' + url;
-    }
-    if (url.startsWith('file://')) {
-      // @ts-ignore
-      return window.WEBVIEW_SERVER_URL + url.replace('file://', '/_app_file_');
-    }
-    if (url.startsWith('content://')) {
-      // @ts-ignore
-      return window.WEBVIEW_SERVER_URL + url.replace('content:/', '/_app_content_');
-    }
-    return url;
-  }
-
-  private async uploadPhoto(imageFileUri: any): Promise<void> {
-    this.error = null;
-    this.loading = await this.loadingCtrl.create({
-      message: 'Uploading...'
-    });
-
-    await this.loading.present();
-
-    // @ts-ignore
-    window.resolveLocalFileSystemURL(imageFileUri,
-        (entry: any) => {
-          entry.file((file: any) => this.readFile(file));
-        });
-  }
-
-  private readFile(file: any): void {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const formData = new FormData();
-      if (reader.result) {
-        const imgBlob = new Blob([reader.result], {type: file.type});
-        formData.append('file', imgBlob, file.name);
-        this.postData(formData);
-      }
+    const option1: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.CAMERA,
+      allowEdit: true
     };
-    reader.readAsArrayBuffer(file);
+
+    const option2: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true
+    };
+
+    this.alertCtrl.create({
+      header: 'Ajouter une image',
+      message: 'Choisir la source',
+      buttons: [
+        {
+          text: 'Camera',
+          handler: () => {
+            this.getPicture(option1);
+          }
+        },
+        {
+          text: 'Galerie',
+          handler: () => {
+            this.getPicture(option2);
+          }
+        }
+      ]
+    }).then(res => {
+      res.present();
+    });
   }
 
-  private postData(formData: FormData): void {
-    this.http.post<boolean>(`${environment.REST_API_SERVER}/upload`, formData)
-        .pipe(
-            catchError(e => this.handleError(e)),
-            finalize(() => this.loading.dismiss())
-        )
-        .subscribe(ok => this.showToast(ok));
+  getPicture(option: CameraOptions) {
+    this.camera.getPicture(option).then(async imageData=>{
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.image64 = imageData;
+      this.patient.photo = base64Image;
+      /*let base64 = await fetch(base64Image);
+      let blob = await base64.blob();
+      alert('BLOB : '+blob);*/
+      //this.image64 = base64Image;
+      //this.imageProfil = blob;
+      //this.selectedFile = new File([blob], this.patient.username || "picture", { type: 'image/png' });
+    });
   }
-
-  private async showToast(ok: boolean | {}): Promise<void> {
-    if (ok === true) {
-      const toast = await this.toastCtrl.create({
-        message: 'Upload successful',
-        duration: 3000,
-        position: 'top'
-      });
-      await toast.present();
-    } else {
-      const toast = await this.toastCtrl.create({
-        message: 'Upload failed',
-        duration: 3000,
-        position: 'top'
-      });
-      await toast.present();
-    }
-  }
-
-  private handleError(error: any): Observable<never> {
-    const errMsg = error.message ? error.message : error.toString();
-    this.error = errMsg;
-    this.changeDetectorRef.detectChanges();
-    return throwError(errMsg);
-  }
-
 
   async onRegister(value) {
     this.patient = value;
+    this.patient.blob = this.image64;
+    let today = new Date();
+    let dd = String(today. getDate()). padStart(2, '0');
+    let mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
+    let yyyy = today. getFullYear();
+    this.patient.registerAt = dd+'/'+mm+'/'+yyyy;
+    //alert(this.patient.dateNaiss);
+    //alert('BASE : '+this.patient.blob);
+   // console.log(this.selectedFile);
+
     if(this.patient.password === this.confpassWord){
       this.registerService.register(this.patient);
     }
