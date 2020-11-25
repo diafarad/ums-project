@@ -3,13 +3,13 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
-    path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    path: 'home',
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
     path: 'login',
@@ -66,6 +66,26 @@ const routes: Routes = [
   {
     path: 'rate-doctor',
     loadChildren: () => import('./rate-doctor/rate-doctor.module').then( m => m.RateDoctorPageModule)
+  },
+  {
+    path: 'admin-home',
+    loadChildren: () => import('./admin-home/admin-home.module').then( m => m.AdminHomePageModule)
+  },
+  {
+    path: 'admin-menu',
+    loadChildren: () => import('./admin-menu/admin-menu.module').then( m => m.AdminMenuPageModule)
+  },
+  {
+    path: 'admin-accueil',
+    loadChildren: () => import('./admin-accueil/admin-accueil.module').then( m => m.AdminAccueilPageModule)
+  },
+  {
+    path: 'admin-rdv',
+    loadChildren: () => import('./admin-rdv/admin-rdv.module').then( m => m.AdminRdvPageModule)
+  },
+  {
+    path: 'new-docteur',
+    loadChildren: () => import('./new-docteur/new-docteur.module').then( m => m.NewDocteurPageModule)
   },
   {
     path: 'access-denied',

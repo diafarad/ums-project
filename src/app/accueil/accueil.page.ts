@@ -12,11 +12,13 @@ export class AccueilPage implements OnInit {
 
   private homeImg = '../../assets/images/homeImg.jpg';
 
-  private lesMedecins : DocteurModel[] ;
+  private lesMedecins : any ;
+  format = 'data:image/jpeg;base64,';
 
   constructor(private docteurService: DocteurService,
               private router: Router) {
-    this.lesMedecins = [
+    this.getAllDocteur();
+    /*this.lesMedecins = [
       {id: 1, nom: 'Abdou Salam SAMBA', photo: '../../assets/users/1.jpg', adresse: 'Dakar', fonction: 'Chirurgien-dentiste'},
       {id: 2, nom: 'Coumba TALL', photo: '../../assets/users/2.png', adresse: 'Thiès', fonction: 'Chirurgienne-orphopédiste'},
       {id: 3, nom: 'Fatoumata CISSE', photo: '../../assets/users/5.png', adresse: 'Foundioune', fonction: 'Cardiologue'},
@@ -27,12 +29,22 @@ export class AccueilPage implements OnInit {
       {id: 8, nom: 'Karim DIOUF', photo: '../../assets/users/3.jpg', adresse: 'Podor', fonction: 'Généraliste'},
       {id: 9, nom: 'Sophie KANE', photo: '../../assets/users/6.png', adresse: 'Dakar', fonction: 'Dentiste'},
       {id: 10, nom: 'Malick GUEYE', photo: '../../assets/users/4.png', adresse: 'Louga', fonction: 'Chirurgien-dentiste'},
-    ]
+    ]*/
   }
 
   ngOnInit() {
+    this.getAllDocteur();
   }
 
+  getAllDocteur(){
+    this.docteurService.getDocteurs()
+        .subscribe(data=>{
+          console.log('LES MEDS : '+data);
+            this.lesMedecins = data;
+        },error=>{
+          console.log(error);
+        });
+  }
 
   onDocteurCheck(m: DocteurModel) {
     this.docteurService.currentDocteur = m;

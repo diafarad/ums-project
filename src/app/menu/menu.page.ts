@@ -86,12 +86,12 @@ export class MenuPage implements OnInit {
             );
     }
 
-  onMenuAction(m) {
+  async onMenuAction(m) {
     if(m.url=='logout'){
       this.authService.logout();
-      this.router.navigateByUrl('/login').then(r => LoginPageModule);
+      await this.router.navigateByUrl('/login').then(r => LoginPageModule);
     } else {
-      this.router.navigateByUrl(m.url);
+      await this.router.navigateByUrl(m.url);
     }
   }
 

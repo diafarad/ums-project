@@ -7,6 +7,9 @@ import {Router} from '@angular/router';
 import {AuthentificationService} from './services/authentification.service';
 import {LoginPageModule} from './login/login.module';
 import {HomePageModule} from './home/home.module';
+import {AdminHomePageModule} from './admin-home/admin-home.module';
+import {AboutPageModule} from './about/about.module';
+import {ContactPageModule} from './contact/contact.module';
 
 @Component({
   selector: 'app-root',
@@ -42,13 +45,27 @@ export class AppComponent {
 
   private login() {
     let auth = this.authService.loadToken();
-    if (!auth){
+    if (auth == 0){
       console.log('AUTH : ' +auth);
       this.router.navigateByUrl('/login').then(res=>LoginPageModule);
     }
     else{
-      console.log('AUTH : ' +auth);
-      this.router.navigateByUrl('/menu/home').then(res=>HomePageModule);
+      if(auth == 1){
+        console.log('AUTH : ' +auth);
+        this.router.navigateByUrl('/admin-menu/admin-home').then(res=>AdminHomePageModule);
+      }
+      if(auth == 2){
+        console.log('AUTH : ' +auth);
+        this.router.navigateByUrl('/menu/contact').then(res=>ContactPageModule);
+      }
+      if(auth == 3){
+        console.log('AUTH : ' +auth);
+        this.router.navigateByUrl('/menu/about').then(res=>AboutPageModule);
+      }
+      if(auth == 4){
+        console.log('AUTH : ' +auth);
+        this.router.navigateByUrl('/menu/home').then(res=>HomePageModule);
+      }
     }
   }
 }

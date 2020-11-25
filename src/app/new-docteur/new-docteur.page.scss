@@ -1,0 +1,126 @@
+ion-content.background{
+  --background: url(../../assets/pexels/pexels8.png) 0 0/100% 100% no-repeat;
+}
+
+.loadImgUser{
+  border-color: #e0ac08;
+  border-style: solid;
+  border-width: 2px;
+  margin-top: 15px;
+  height: 50px;
+  width: 50px;
+}
+
+.myimguserpic{
+  width: 130px;
+  height: 130px;
+  border: 2px ridge #e0ac08;
+  border-radius: 50%;
+}
+
+ion-icon{
+  color: black;
+  font-size: 45px;
+}
+
+.custom-form {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 360px;
+  margin: 25px 15px 15px;
+  padding: 0 0 40px 0 ;
+  border-radius: 4px;
+  .btn-primary {
+    background-color: #2fdf75;
+    border-color: #2fdf75;
+  }
+  .form-group {
+    position: relative;
+    padding-top: 16px;
+    margin-bottom: 16px;
+    .animated-label {
+      position: absolute;
+      top: 20px;
+      color: black;
+      left: 0;
+      bottom: 0;
+      z-index: 2;
+      width: 100%;
+      font-weight: 300;
+      opacity: 0.5;
+      cursor: text;
+      transition: 0.2s ease all;
+      margin: 0;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      &:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 45%;
+        height: 2px;
+        width: 10px;
+        visibility: hidden;
+        background-color:#e0ac08;
+        transition: 0.2s ease all;
+      }
+    }
+    &.not-empty {
+      .animated-label {
+        top: 0;
+        font-size: 12px;
+      }
+    }
+    .form-control {
+      position: relative;
+      z-index: 1;
+      border-radius: 0;
+      border-width: 0 0 1px;
+      border-bottom-color: #1a1a1a;
+      height: auto;
+      padding: 3px 0 5px;
+      &:focus {
+        box-shadow: none;
+        border-bottom-color: #1a1a1a;
+        ~ .animated-label {
+          top: 0;
+          opacity: 1;
+          color: #e0ac08;
+          font-size: 12px;
+          &:after {
+            visibility: visible;
+            width: 100%;
+            left: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+ion-button {
+  z-index: 100;
+}
+
+ion-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.myAlertBtn{
+  text-transform: none;
+}
+
+.myAlertBtn1{
+  color : #f44336;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+

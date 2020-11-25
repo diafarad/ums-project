@@ -1,28 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { MenuPage } from './menu.page';
+import { AdminMenuPage } from './admin-menu.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: MenuPage,
+    component: AdminMenuPage,
     children : [
-      {
-        path: 'home',
-        loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
-      },
       {
         path: 'admin-home',
         loadChildren: () => import('../admin-home/admin-home.module').then( m => m.AdminHomePageModule)
       },
       {
-        path: 'rdvTab',
-        loadChildren: () => import('../rdv-tabs/rdv-tabs.module').then( m => m.RdvTabsPageModule)
+        path: 'admin-rdv',
+        loadChildren: () => import('../admin-rdv/admin-rdv.module').then( m => m.AdminRdvPageModule)
       },
       {
-        path: 'urgenceTab',
-        loadChildren: () => import('../urg-tabs/urg-tabs.module').then( m => m.UrgTabsPageModule)
+        path: 'new-docteur',
+        loadChildren: () => import('../new-docteur/new-docteur.module').then( m => m.NewDocteurPageModule)
       },
       {
         path: 'about',
@@ -52,4 +48,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class MenuPageRoutingModule {}
+export class AdminMenuPageRoutingModule {}
