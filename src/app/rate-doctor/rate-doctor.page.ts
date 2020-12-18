@@ -11,6 +11,7 @@ import {AlertController} from '@ionic/angular';
 export class RateDoctorPage implements OnInit {
   private currentDocteur: DocteurModel ;
   formRating: number = 0;
+  format = 'data:image/jpeg;base64,';
 
   constructor(private docteurService: DocteurService,
               private alertCtrl: AlertController) { }

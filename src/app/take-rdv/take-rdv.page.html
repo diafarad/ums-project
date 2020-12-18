@@ -6,33 +6,34 @@
 
     <ion-title style="font-size: smaller">PRENDRE UN RDV</ion-title>
   </ion-toolbar>
+  <div class="module lr">
+    <p slot="start">Prendre un rendez-vous</p>
+  </div>
 </ion-header>
 
 <ion-content>
   <center>
-    <ion-img [src]="coverImg"></ion-img>
-    <ion-item style="margin: 25px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
-      <ion-avatar><ion-img src="{{checkDocteur.photo}}"></ion-img></ion-avatar>
-      <ion-label class="ion-text-wrap" style="text-align: center; margin-top: 0; margin-bottom: 0;">Dr. {{checkDocteur.nom}}</ion-label>
-    </ion-item>
-    <form>
-      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
-        <ion-icon name="business-outline"></ion-icon>
-        <ion-label class="ion-text-wrap" style="text-align: center; margin-top: 0; margin-bottom: 0;">Clinique Abass Ndao</ion-label>
-      </ion-item>
-      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
+    <ion-card>
+      <ion-avatar><ion-img src="{{format+checkDocteur.photo}}"></ion-img></ion-avatar>
+      <ion-label class="ion-text-wrap" style="font:16px Roboto, 'Helvetica Neue', sans-serif; font-weight: bold; text-align: center; margin-top: 0; margin-bottom: 0;">Dr. {{checkDocteur.prenom}} {{checkDocteur.nom}}</ion-label>
+      <br>
+      <ion-label class="ion-text-wrap" style="text-align: center; margin-top: 0; margin-bottom: 0;">{{checkDocteur.specialite}}</ion-label>
+      <ion-item style="margin-top: 5px">
         <ion-icon name="location-outline"></ion-icon>
-        <ion-label class="ion-text-wrap" style="text-align: center; margin-top: 0; margin-bottom: 0;">Dakar - Fann</ion-label>
+        <ion-label class="ion-text-wrap" style="font:14px Roboto, 'Helvetica Neue', sans-serif; text-align: center; margin-top: 0; margin-bottom: 0;">{{checkDocteur.hopital}}
+          <br>{{checkDocteur.adresse}}
+        </ion-label>
       </ion-item>
-      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
-        <ion-icon name="calendar-outline"></ion-icon>
-        <ion-datetime min="{{ today }}" max="{{nextYear}}" displayFormat="DD MMMM YYYY" cancel-text="X" done-text="Ok" placeholder="Sélectionner la date"></ion-datetime>
+
+      <ion-item>
+        <ion-calendar style="padding: 0; height: 250px; width: 100%; background-color: #515151;"
+                      (select)="onChangeDate($event)"
+                      [type]="type"
+                      [options]="optionsRange"
+                      [format]="'YYYY-MM-DD'">
+        </ion-calendar>
       </ion-item>
-      <ion-item style="margin: 10px 10px 10px 10px; border: 1px ridge; border-left: 0px; border-right: 0px">
-        <ion-icon name="time-outline"></ion-icon>
-        <ion-datetime min="08:00" max="16:00" displayFormat="HH:mm" cancel-text="Annuler" done-text="Valider" placeholder="Sélectionner l'heure"></ion-datetime>
-      </ion-item>
-      <ion-button type="submit" color="primary" expand="full">Valider</ion-button>
-    </form>
+      <ion-button type="submit" color="primary">Valider</ion-button>
+    </ion-card>
   </center>
 </ion-content>

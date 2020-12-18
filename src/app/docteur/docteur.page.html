@@ -15,11 +15,11 @@
   <div class="bgdocteurpage">
     <center>
     <ion-avatar style="margin-top: 23px; margin-bottom: 10px">
-      <ion-img [src]="currentDocteur.photo"></ion-img>
+      <ion-img [src]="format+currentDocteur.photo"></ion-img>
     </ion-avatar>
-     <strong><ion-label style="color: white">Dr. {{currentDocteur.nom}}</ion-label></strong>
+     <strong><ion-label style="color: white">Dr. {{currentDocteur.prenom}} {{currentDocteur.nom}}</ion-label></strong>
       <br>
-      <ion-label style="font-size: small; color: white">{{currentDocteur.fonction}}</ion-label>
+      <ion-label style="font-size: small; color: white">{{currentDocteur.specialite}}</ion-label>
       <br>
       <button (click)="onTakeRdv(currentDocteur)" style="border-radius: 8px; margin-top: 7px; height: 30px ;background-color: #00d1db">Prendre un rendez-vous</button>
     </center>

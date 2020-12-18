@@ -16,7 +16,7 @@ const routes: Routes = [
       {
         path: 'urgence', loadChildren : () => import('../urgence/urgence.module').then( m => m.UrgencePageModule)
       }
-    ],
+    ]
   },
   {
     path: '',

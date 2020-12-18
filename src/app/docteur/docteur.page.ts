@@ -18,6 +18,7 @@ export class DocteurPage implements OnInit {
   customForm: FormGroup;
   formRating: any = 0;
   rate: any = 2.4;
+  format = 'data:image/jpeg;base64,';
 
   constructor(private docteurService: DocteurService,
               private router: Router,

@@ -23,7 +23,7 @@ const routes: Routes = [
     path: '',
     redirectTo: 'admin-home/admin-accueil',
     pathMatch: 'full'
-  }
+  },
 ];
 
 @NgModule({

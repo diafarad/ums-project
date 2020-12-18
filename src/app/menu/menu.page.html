@@ -1,31 +1,30 @@
 <ion-menu contentId="content">
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar>
       <ion-title>MENU</ion-title>
+      <ion-icon slot="end" name="contrast-outline"></ion-icon>
+      <ion-toggle slot="end" [ngModel]="darkmode" (ionChange)="changeTheme()"></ion-toggle>
     </ion-toolbar>
+    <div class="module lr" (click)="onProfilePage(PatientProfile)">
+      <center style="margin-top: 50px">
+        <ion-avatar>
+          <ion-img class="imgpic" src="{{format+PatientProfile.photo}}"></ion-img>
+        </ion-avatar>
+      </center>
+      <p slot="start">{{PatientProfile.prenom}} {{PatientProfile.nom}}</p>
+    </div>
   </ion-header>
 
   <ion-content>
-    <div *ngIf="PatientProfile" class="bgmenu" (click)="onProfilePage(PatientProfile)">
-      <center>
-        <ion-avatar>
-          <ion-img class="userimg" src=""></ion-img>
-        </ion-avatar>
-        <ion-label class="userTxt">{{PatientProfile.prenom}} {{PatientProfile.nom}}</ion-label>
-      </center>
-    </div>
-    <ion-menu-toggle autoHide=" " *ngFor="let p of pages">
+    <div class="bgmenu"></div>
+    <ion-menu-toggle autoHide="" *ngFor="let p of pages">
       <ion-item (click)="onMenuAction(p)">
         <ion-icon [name]="p.icon" slot="start"></ion-icon>
         <ion-label>{{p.title}}</ion-label>
       </ion-item>
     </ion-menu-toggle>
-
-    <ion-item>
-      <ion-icon slot="start" name="contrast-outline"></ion-icon>
-      <ion-toggle slot="end" [ngModel]="darkmode" (ionChange)="changeTheme()"></ion-toggle>
-    </ion-item>
   </ion-content>
 </ion-menu>
 
 <ion-router-outlet id="content" main></ion-router-outlet>
+

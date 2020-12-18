@@ -82,12 +82,12 @@ export class AdminMenuPage implements OnInit {
         );
   }
 
-  async onMenuAction(m) {
-    if(m.url=='logout'){
+  onMenuAction(m) {
+    if(m.url==='logout'){
       this.authService.logout();
-      await this.router.navigateByUrl('/login').then(r => LoginPageModule);
+      this.router.navigateByUrl('/login').then(r => LoginPageModule);
     } else {
-      await this.router.navigateByUrl(m.url);
+      this.router.navigateByUrl(m.url).then(r => r);
     }
   }
 

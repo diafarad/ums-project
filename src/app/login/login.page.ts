@@ -10,14 +10,12 @@ import {RegisterPageModule} from '../register/register.module';
 })
 export class LoginPage implements OnInit {
 
-  darkmode : boolean = true;
   user: any;
   public avatarImage = "assets/images/profile.jpg";
   message: string;
 
   constructor(private router: Router, private authService: AuthentificationService) {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkmode = prefersDark.matches;
+
     this.user = {
       username: '',
       password: ''
@@ -25,12 +23,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  changeTheme(){
-    //const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkmode = ! this.darkmode;
-    document.body.classList.toggle('dark');
   }
 
   onLogin(user) {

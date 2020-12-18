@@ -3,11 +3,9 @@ import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {HomePageModule} from '../home/home.module';
 import {AboutPageModule} from '../about/about.module';
-import {UrgencePageModule} from '../urgence/urgence.module';
-import {UrgTabsPageModule} from '../urg-tabs/urg-tabs.module';
 import {PatientProfileModel} from '../model/PatientProfile.model';
-import {AdminAccueilPageModule} from '../admin-accueil/admin-accueil.module';
 import {AdminHomePageModule} from '../admin-home/admin-home.module';
+import {AccueilPageModule} from '../accueil/accueil.module';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +27,8 @@ export class AuthentificationService {
 
   login(user){
     this.loginRequest(user).subscribe(res => {
-          console.log('Resultats : '+res);
-          console.log('Statut : '+res.body.status+' Données : '+res.body.data);
+          //console.log('Resultats : '+res);
+          //console.log('Statut : '+res.body.status+' Données : '+res.body.data);
           if(res.body.status !== 'error'){
             this.saveToken(res.body.data);
             this.userOnline = res.body.data.username;
@@ -40,16 +38,16 @@ export class AuthentificationService {
             console.log('Username : '+ res.body.data.username);
             this.message = '';
             if(res.body.data.authorities[0].authority === 'ROLE_ADMIN'){
-              this.router.navigate(['/menu/admin-home']).then(r => AdminHomePageModule);
-              alert('ADMIN');
+              this.router.navigateByUrl('/admin-menu/admin-home').then(r => AdminHomePageModule);
+              //alert('ADMIN');
             }
             if(res.body.data.authorities[0].authority === 'ROLE_USER'){
-              this.router.navigate(['/menu/home']).then(r => HomePageModule);
-              alert('USER');
+              this.router.navigateByUrl('/menu/home');
+              //alert('USER');
             }
             if(res.body.data.authorities[0].authority === 'ROLE_MEDECIN'){
-              this.router.navigate(['/menu/about']).then(r => AboutPageModule);
-              alert('MEDECIN');
+              this.router.navigateByUrl('/menu/about').then(r => AboutPageModule);
+              //alert('MEDECIN');
             }
           }
           else{
@@ -105,6 +103,7 @@ export class AuthentificationService {
     localStorage.removeItem('token');
     localStorage.removeItem('authorities');
     localStorage.removeItem('username');
+    localStorage.removeItem('autorisation');
   }
 
 }

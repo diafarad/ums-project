@@ -1,18 +1,32 @@
-.bgmenu{
-  background-image: url('../../assets/images/medecine.jpg');
-  height: 150px;
-  padding-top: 25%;
-  padding-left: 10px;
+.module {
+  background:
+          linear-gradient(
+                          rgba(0, 0, 0, 0.5),
+                          rgba(0, 0, 0, 0.5)
+          ),
+          url('../../assets/images/medecine.jpg');
+  background-size: cover;
+  width: 100%;
+  height: 160px;
+
+  position: relative;
+  float: left;
 }
 
-.userimg{
-  border-radius: 50%;
-  border-style: solid;
-  border-color: #e0bb2e;
-}
 
-.userTxt{
-  color: #1a1a1a;
-  font-weight: bold;
-  font-family: 'Cursive';
+.lr p {
+  font-family: 'Bookman Old Style', sans-serif;
+  position: absolute;
+  width: 100%;
+  bottom: 20px;
+  padding-right: 5px;
+  padding-left: 2px;
+  text-align: center;
+  color: white;
+  margin: 0;
+  background:
+          linear-gradient(
+                          rgba(0, 0, 0, 0.3),
+                          rgba(0, 0, 0, 0.3)
+          );
 }
