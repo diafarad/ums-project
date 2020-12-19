@@ -10,6 +10,7 @@ import {AuthentificationService} from '../services/authentification.service';
 export class ProfilePage implements OnInit {
 
   private patientProfil : PatientProfileModel;
+  format = 'data:image/jpeg;base64,';
 
   constructor(private authService : AuthentificationService) { }
 

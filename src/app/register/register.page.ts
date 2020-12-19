@@ -59,6 +59,7 @@ export class RegisterPage implements OnInit {
     };
 
     this.alertCtrl.create({
+      cssClass: 'myalertclass',
       header: 'Ajouter une image',
       message: 'Choisir la source',
       buttons: [

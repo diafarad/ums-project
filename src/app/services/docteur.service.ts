@@ -10,6 +10,7 @@ export class DocteurService {
 
   public REST_API_SERVER = "http://localhost:8080";
   public message: string;
+  public ok: string;
 
   constructor(public http: HttpClient) { }
 
@@ -33,6 +34,28 @@ export class DocteurService {
                     else if (res.body.data.error === 'MAIL_EXIST'){
                         this.message = 'Ce mail a déjà un compte!';
                     }
+                }
+            },
+            err => {
+                console.log(err);
+            });
+    }
+
+    public takeRdv(rdv : any){
+        return this.http.post<any>(this.REST_API_SERVER + "/hopital/takerdv", rdv, {observe:'response'});
+    }
+
+    rdv(rdv){
+        this.takeRdv(rdv).subscribe(res => {
+                if(res.body.status !== 'error'){
+                    this.ok = 'ok';
+                    localStorage.setItem('ok','ok');
+                    //alert(this.ok);
+                }
+                else{
+                    this.ok = 'ko';
+                    localStorage.setItem('ok','ko');
+                    //alert(this.ok);
                 }
             },
             err => {

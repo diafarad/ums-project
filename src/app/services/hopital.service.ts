@@ -19,4 +19,5 @@ export class HopitalService {
     return this.http.get(this.REST_API_SERVER + "/hopital/specialite/all");
   }
 
+
 }

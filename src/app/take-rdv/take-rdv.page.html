@@ -13,7 +13,6 @@
 
 <ion-content>
   <center>
-    <ion-card>
       <ion-avatar><ion-img src="{{format+checkDocteur.photo}}"></ion-img></ion-avatar>
       <ion-label class="ion-text-wrap" style="font:16px Roboto, 'Helvetica Neue', sans-serif; font-weight: bold; text-align: center; margin-top: 0; margin-bottom: 0;">Dr. {{checkDocteur.prenom}} {{checkDocteur.nom}}</ion-label>
       <br>
@@ -25,15 +24,13 @@
         </ion-label>
       </ion-item>
 
-      <ion-item>
-        <ion-calendar style="padding: 0; height: 250px; width: 100%; background-color: #515151;"
-                      (select)="onChangeDate($event)"
+        <ion-calendar style="padding: 0; width: 100%; border: 1px ridge grey"
+                      (change)="onChangeDate($event)"
                       [type]="type"
+                      [(ngModel)]="rdv.dateRdv"
                       [options]="optionsRange"
                       [format]="'YYYY-MM-DD'">
         </ion-calendar>
-      </ion-item>
-      <ion-button type="submit" color="primary">Valider</ion-button>
-    </ion-card>
+      <ion-button (click)="onTakeRdv()" color="primary" >Valider</ion-button>
   </center>
 </ion-content>

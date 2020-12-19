@@ -91,6 +91,7 @@ export class MenuPage implements OnInit {
     }
 
     onProfilePage(PatientProfile: PatientProfileModel) {
-        
+        this.authService.currentProfile = PatientProfile;
+        this.router.navigateByUrl('/profile');
     }
 }

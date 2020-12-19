@@ -29,12 +29,14 @@
 
 @import '~ngx-bar-rating/themes/br-stars-theme';
 
-.alert-head{
-  display: none;
-}
+.myalertclass{
+  .alert-head{
+    display: none;
+  }
 
-.alert-message{
-  display: none;
+  .alert-message{
+    display: none;
+  }
 }
 
 ion-searchbar {
