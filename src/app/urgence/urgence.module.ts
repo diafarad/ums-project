@@ -13,7 +13,7 @@ import { UrgencePage } from './urgence.page';
     IonicModule,
     UrgencePageRoutingModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA_nvGb7cglNpES5Xy-GsLZ-tqR8pMK_JI'
+      apiKey: 'AIzaSyDPuNARpuLU1nxDERFaHd16ySqcjnO-bvw'
     })
   ],
   declarations: [UrgencePage]

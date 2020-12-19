@@ -12,19 +12,23 @@
   <center>
     <ion-item style="border-bottom: 1px ridge">
       <ion-icon name="location-outline"></ion-icon>
-      <ion-label style="text-align: center">Votre position actuelle</ion-label>
+      <ion-label style="text-align: center">Votre position actuelle
+        <br>
+        <ion-label style="text-align: center; font-size: smaller">Précision : {{precision}} km</ion-label>
+      </ion-label>
     </ion-item>
   </center>
-  <agm-map  [(zoom)]="zoom" [latitude]="latitude" [longitude]="longitude">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
   <center>
-    <div class="labelPos">
-      <ion-label style="text-align: center; font-size: small">Précision : {{precision}} km</ion-label>
-    </div>
   </center>
-
+  <div #map id="map"></div>
   <center>
-  <ion-button class="myBtn" expand="full" style="font: 11px 'Bookman Old Style', sans-serif">Services de santé les plus proches</ion-button>
+  <button (click)="getServicesDeSante(getUserPosition())" style="background-color: #03A9F4; height: 40px; width: 90%;font: 14px 'Bookman Old Style', sans-serif">Services de santé les plus proches</button>
   </center>
+  <div style="width : 100% ;height: 60%">
+    <ion-list>
+      <ion-item *ngFor="let place of places">
+        <p></p>
+      </ion-item>
+    </ion-list>
+  </div>
 </ion-content>
