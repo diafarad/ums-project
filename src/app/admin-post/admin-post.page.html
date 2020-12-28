@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Admin-post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list *ngIf="lesPosts">
+    <ion-card *ngFor="let m of lesPosts">
+      <ion-item (click)="onPostCheck(m)">
+        <ion-row>
+          <ion-col>
+            <ion-label style="font-size: small; font-weight: bold; margin-right: 5px; font-family: 'Gill Sans MT Ext Condensed Bold'">{{m.title}}</ion-label>
+            <ion-label style="font-size: small; margin-right: 5px; font-family: 'Gill Sans MT Ext Condensed Bold'">{{m.username}}</ion-label>
+            <ion-label style="font-size: small; margin-right: 5px; font-family: 'Gill Sans MT'">{{convertDate(m.dateCreate)}}</ion-label>
+          </ion-col>
+
+        </ion-row>
+        <ion-buttons slot="end">
+          <ion-button>
+            <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

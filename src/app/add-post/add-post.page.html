@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Nouveau Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="add-post-content">
+      <center>
+      <div>
+        <h3 class="new-post-title">Créer un nouveau Post</h3>
+      </div>
+      <hr>
+      <div>
+          <ion-button (click)="onLoadImagePost()">
+              <ion-icon name="camera-outline"></ion-icon>
+          </ion-button>
+      </div>
+      <img style="max-height: 350px; max-width: 350px" class="myimg" *ngIf="image64" [src]="image64"/>
+      <form [formGroup]="addPostForm" (ngSubmit)="addPost()">
+        <ion-item>
+          <ion-label class="post-title">Titre</ion-label>
+          <ion-input style="border-bottom: 1px ridge grey" type="text" [formControlName]="'title'" class="form-control" placeholder="Entrer le titre"></ion-input>
+        </ion-item>
+        <editor [formControlName]="'body'" [init]="{plugins: 'link'}"></editor>
+        <ion-button expand="full" type="submit">Publier</ion-button>
+      </form>
+      </center>
+    </div>
+
+</ion-content>

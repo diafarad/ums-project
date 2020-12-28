@@ -6,6 +6,7 @@ import {AboutPageModule} from '../about/about.module';
 import {PatientProfileModel} from '../model/PatientProfile.model';
 import {AdminHomePageModule} from '../admin-home/admin-home.module';
 import {AccueilPageModule} from '../accueil/accueil.module';
+import {AddPostPageModule} from '../add-post/add-post.module';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +39,7 @@ export class AuthentificationService {
             console.log('Username : '+ res.body.data.username);
             this.message = '';
             if(res.body.data.authorities[0].authority === 'ROLE_ADMIN'){
-              this.router.navigateByUrl('/admin-menu/admin-home').then(r => AdminHomePageModule);
+              this.router.navigateByUrl('/admin-menu/admin-post').then(r => AddPostPageModule);
               //alert('ADMIN');
             }
             if(res.body.data.authorities[0].authority === 'ROLE_USER'){
@@ -66,6 +67,10 @@ export class AuthentificationService {
 
   requestUserProfile(userName: string){
     return this.http.get<any>(this.REST_API_SERVER + '/getUser/'+userName,{observe:'response'});
+  }
+
+  requestUser(userName: string){
+    return this.http.get<any>(this.REST_API_SERVER + '/getUtilisateur/'+userName,{observe:'response'});
   }
 
 

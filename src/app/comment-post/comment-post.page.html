@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Commentaire</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div class="module lr">
+      <p slot="start">{{currentPost.title}}</p>
+      <br>
+      <ion-text [innerHTML]="currentPost.content"></ion-text>
+    </div>
+  </ion-card>
+  <ion-list *ngIf="lesCommentaires">
+    <ion-card *ngFor="let m of lesCommentaires">
+      <ion-item>
+        <ion-avatar slot="start">
+          <img src="{{format+m.imgauteur}}">
+        </ion-avatar>
+        <ion-row>
+          <ion-col>
+            <ion-text slot="start">{{m.auteur}}</ion-text>
+            <ion-text style="font-size: small; font-weight: bold; margin-right: 5px; font-family: 'Gill Sans MT Ext Condensed Bold'">{{m.content}}</ion-text>
+            <ion-label style="font-size: small; margin-right: 5px; font-family: 'Gill Sans MT'" >{{m.likes}}<ion-icon style="bottom: 6px; position: absolute" color="{{iconColor}}" name="{{iconHeart}}"></ion-icon></ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-card>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+    <ion-textarea [(ngModel)]="comment" style="width: 80%;position: absolute; bottom: 0" placeholder="Votre commentaire..."></ion-textarea>
+      <ion-button (click)="postComment()" [attr.disabled]="comment==''" slot="end" color="primary">OK</ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

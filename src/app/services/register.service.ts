@@ -12,7 +12,7 @@ export class RegisterService {
   public REST_API_SERVER = "http://localhost:8080";
   public message: string;
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient, private router: Router) { }
 
   public registerRequest(patient: any){
     return this.http.post<any>(this.REST_API_SERVER + "/registerPatient", patient, {observe:'response'});
@@ -22,6 +22,7 @@ export class RegisterService {
     this.registerRequest(patient).subscribe(res => {
           if(res.body.status !== 'error'){
             this.message = 'Inscription effectuée';
+            this.router.navigateByUrl('/register-success');
           }
           else{
             if (res.body.data.error === 'USERNAME_EXIST'){

@@ -53,7 +53,7 @@ export class AppComponent {
     else{
       if(auth == 1){
         //console.log('AUTH : ' +auth);
-        this.router.navigateByUrl('/admin-menu/admin-home').then(res=>AdminHomePageModule);
+        this.router.navigateByUrl('/admin-menu/admin-post').then(res=>AdminHomePageModule);
       }
       if(auth == 2){
         //console.log('AUTH : ' +auth);

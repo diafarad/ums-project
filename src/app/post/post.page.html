@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Post</ion-title>
+  </ion-toolbar>
+  <div class="module lr">
+    <ion-img *ngIf="currentPost.image" src="{{format+currentPost.image}}"></ion-img>
+    <p slot="start">{{currentPost.title}}</p>
+  </div>
+</ion-header>
+
+<ion-content>
+    <ion-label (click)="commentPost(currentPost)" style="font-family: 'Gill Sans MT'; margin-left: 5px">98<ion-icon style="position: absolute; top: 3px" name="chatbox-ellipses-outline"></ion-icon></ion-label>
+    <ion-label (click)="likePost()" style="font-family: 'Gill Sans MT'; margin-left: 20px">{{currentPost.likes}}<ion-icon style="position: absolute; top: 3px" color="{{iconColor}}" name="{{iconHeart}}"></ion-icon></ion-label>
+  <ion-label style="position: absolute; right: 2%; font-size: small; font-family: 'Gill Sans MT'">Éditer le : {{convertDate(currentPost.dateCreate)}}</ion-label>
+  <ion-text [innerHTML]="currentPost.content" ></ion-text>
+</ion-content>

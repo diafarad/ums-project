@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {DocteurModel} from '../model/Docteur.model';
 import {DocteurService} from '../services/docteur.service';
 import {Router} from '@angular/router';
+import {PostService} from '../services/post.service';
+import {PostPayload} from '../model/PostPayload';
 
 @Component({
   selector: 'app-accueil',
@@ -13,26 +15,26 @@ export class AccueilPage implements OnInit {
   private homeImg = '../../assets/images/homeImg.jpg';
 
   private lesMedecins : any ;
+  private lePost : PostPayload = {
+    id: 0,
+    title: '',
+    content: '',
+    username: '',
+    image:'',
+    likes: 0,
+    dateCreate: 0
+  } ;
   format = 'data:image/jpeg;base64,';
 
   constructor(private docteurService: DocteurService,
+              private postService: PostService,
               private router: Router) {
+    this.getLastPost();
     this.getAllDocteur();
-    /*this.lesMedecins = [
-      {id: 1, nom: 'Abdou Salam SAMBA', photo: '../../assets/users/1.jpg', adresse: 'Dakar', fonction: 'Chirurgien-dentiste'},
-      {id: 2, nom: 'Coumba TALL', photo: '../../assets/users/2.png', adresse: 'Thiès', fonction: 'Chirurgienne-orphopédiste'},
-      {id: 3, nom: 'Fatoumata CISSE', photo: '../../assets/users/5.png', adresse: 'Foundioune', fonction: 'Cardiologue'},
-      {id: 4, nom: 'Karim DIOUF', photo: '../../assets/users/3.jpg', adresse: 'Podor', fonction: 'Généraliste'},
-      {id: 5, nom: 'Sophie KANE', photo: '../../assets/users/6.png', adresse: 'Dakar', fonction: 'Dentiste'},
-      {id: 6, nom: 'Malick GUEYE', photo: '../../assets/users/4.png', adresse: 'Louga', fonction: 'Chirurgien-dentiste'},
-      {id: 7, nom: 'Badara MBENGUE', photo: '../../assets/users/1.jpg', adresse: 'Dakar', fonction: 'Cardiologue'},
-      {id: 8, nom: 'Karim DIOUF', photo: '../../assets/users/3.jpg', adresse: 'Podor', fonction: 'Généraliste'},
-      {id: 9, nom: 'Sophie KANE', photo: '../../assets/users/6.png', adresse: 'Dakar', fonction: 'Dentiste'},
-      {id: 10, nom: 'Malick GUEYE', photo: '../../assets/users/4.png', adresse: 'Louga', fonction: 'Chirurgien-dentiste'},
-    ]*/
   }
 
   ngOnInit() {
+    this.getLastPost();
     this.getAllDocteur();
   }
 
@@ -46,8 +48,39 @@ export class AccueilPage implements OnInit {
         });
   }
 
+  getLastPost(){
+    this.postService.getLastPost()
+        .subscribe(res=>{
+          if(res.body.status !== 'error'){
+            this.lePost.id = res.body.data.id;
+            this.lePost.title = res.body.data.title;
+            this.lePost.content = res.body.data.content;
+            this.lePost.image = res.body.data.image;
+            this.lePost.username = res.body.data.username;
+            this.lePost.dateCreate = res.body.data.dateCreate;
+            this.lePost.likes = res.body.data.likes;
+          }
+        },error=>{
+          console.log(error);
+        });
+  }
+
+  convertDate(date)
+  {
+    let today = new Date(date);
+    let dd = String(today. getDate()). padStart(2, '0');
+    let mm = String(today. getMonth() + 1). padStart(2, '0'); //January is 0!
+    let yyyy = today. getFullYear();
+    return dd+'/'+mm+'/'+yyyy;
+  }
+
   onDocteurCheck(m: DocteurModel) {
     this.docteurService.currentDocteur = m;
     this.router.navigateByUrl('/menu/docteur');
+  }
+
+  viewPost(lePost: PostPayload) {
+    this.postService.currentPost = lePost;
+    this.router.navigate(['/menu/post'])
   }
 }

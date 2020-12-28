@@ -13,6 +13,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {TokenInterceptorService} from './services/token-interceptor.service';
+import {EditorModule} from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import {TokenInterceptorService} from './services/token-interceptor.service';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
+    EditorModule,
     AppRoutingModule],
   providers: [
     { provide : HTTP_INTERCEPTORS, useClass : TokenInterceptorService, multi: true},

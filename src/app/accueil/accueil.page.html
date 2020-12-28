@@ -6,8 +6,9 @@
 
     <ion-title style="font-size: smaller">ACCUEIL</ion-title>
   </ion-toolbar>
-  <div class="module lr">
-    <p slot="start">Cancer : bientôt un test universel pour le détecter en 10 minutes?</p>
+  <div class="module lr" (click)="viewPost(lePost)">
+    <ion-img src="{{format+lePost.image}}"></ion-img>
+    <p slot="start">{{lePost.title}}</p>
   </div>
 </ion-header>
 
@@ -30,6 +31,4 @@
         </ion-item>
     </ion-card>
   </ion-list>
-
-
 </ion-content>

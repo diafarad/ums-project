@@ -40,6 +40,22 @@ const routes: Routes = [
         path: 'rate-doctor',
         loadChildren: () => import('../rate-doctor/rate-doctor.module').then( m => m.RateDoctorPageModule)
       },
+      {
+        path: 'add-post',
+        loadChildren: () => import('../add-post/add-post.module').then( m => m.AddPostPageModule)
+      },
+      {
+        path: 'admin-post',
+        loadChildren: () => import('../admin-post/admin-post.module').then( m => m.AdminPostPageModule)
+      },
+      {
+        path: 'post',
+        loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
+      },
+      {
+        path: 'comment-post',
+        loadChildren: () => import('../comment-post/comment-post.module').then( m => m.CommentPostPageModule)
+      },
     ]
   }
 ];

@@ -44,6 +44,10 @@ const routes: Routes = [
         path: 'rate-doctor',
         loadChildren: () => import('../rate-doctor/rate-doctor.module').then( m => m.RateDoctorPageModule)
       },
+      {
+        path: 'post',
+        loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
+      },
     ]
   }
 ];

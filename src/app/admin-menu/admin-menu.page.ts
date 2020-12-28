@@ -32,22 +32,14 @@ export class AdminMenuPage implements OnInit {
 
   public pages = [
     {title : 'Home', url: '/admin-menu/admin-home', icon:'home-outline'},
-    {title : 'RDV', url: '/menu/rdvTab', icon: 'calendar-outline'},
-    {title : 'URG', url: '/menu/urgenceTab', icon: 'fitness-outline'},
+    {title : 'RDV', url: '/admin-menu/rdvTab', icon: 'calendar-outline'},
+    {title : 'URG', url: '/admin-menu/urgenceTab', icon: 'fitness-outline'},
     {title : 'Déconnexion', url: 'logout', icon: 'log-out-outline'}
   ];
 
   constructor(private router: Router, private authService: AuthentificationService) {
     this.userName = localStorage.getItem('username');
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkmode = prefersDark.matches;
     //console.log('Le nom User : '+this.userName);
-  }
-
-  changeTheme(){
-    //const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    this.darkmode = ! this.darkmode;
-    document.body.classList.toggle('dark');
   }
 
   ngOnInit() {
