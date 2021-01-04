@@ -11,12 +11,13 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <div class="module lr">
-    <p slot="start">Cancer : bientôt un test universel pour le détecter en 10 minutes?</p>
-  </div>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <div class="module lr">
+    </div>
+  </ion-card>
   <ion-list *ngIf="lesMedecins">
     <ion-card *ngFor="let m of lesMedecins">
       <ion-item (click)="onDocteurCheck(m)">

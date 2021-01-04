@@ -56,6 +56,10 @@ const routes: Routes = [
         path: 'comment-post',
         loadChildren: () => import('../comment-post/comment-post.module').then( m => m.CommentPostPageModule)
       },
+      {
+        path: 'admin-rdv-tab',
+        loadChildren: () => import('../admin-rdv-tab/admin-rdv-tab.module').then( m => m.AdminRdvTabPageModule)
+      },
     ]
   }
 ];

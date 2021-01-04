@@ -60,9 +60,6 @@ export class MenuPage implements OnInit {
         this.authService.requestUserProfile(this.userName)
             .subscribe(res=>{
                     if(res.body.status !== 'error'){
-                        console.log('Données utilisateurs : ' + res.body);
-                        console.log('ID : ' + res.body.data.id);
-                        console.log('Prenom : ' + res.body.data.prenom);
                         this.PatientProfile.id = res.body.data.id;
                         this.PatientProfile.prenom = res.body.data.prenom;
                         this.PatientProfile.nom = res.body.data.nom;

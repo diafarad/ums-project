@@ -11,6 +11,7 @@ import {AdminHomePageModule} from './admin-home/admin-home.module';
 import {AboutPageModule} from './about/about.module';
 import {ContactPageModule} from './contact/contact.module';
 import {AccueilPageModule} from './accueil/accueil.module';
+import {AdminAccueilPageModule} from './admin-accueil/admin-accueil.module';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +54,7 @@ export class AppComponent {
     else{
       if(auth == 1){
         //console.log('AUTH : ' +auth);
-        this.router.navigateByUrl('/admin-menu/admin-post').then(res=>AdminHomePageModule);
+        this.router.navigateByUrl('/admin-menu/admin-home').then(res=>AdminAccueilPageModule);
       }
       if(auth == 2){
         //console.log('AUTH : ' +auth);

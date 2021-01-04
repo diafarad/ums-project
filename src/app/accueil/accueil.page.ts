@@ -25,6 +25,10 @@ export class AccueilPage implements OnInit {
     dateCreate: 0
   } ;
   format = 'data:image/jpeg;base64,';
+  private currentPage: number = 1;
+  private size:number = 7;
+  private totalPages: number;
+  private dataMedecins =  [];
 
   constructor(private docteurService: DocteurService,
               private postService: PostService,
@@ -83,4 +87,28 @@ export class AccueilPage implements OnInit {
     this.postService.currentPost = lePost;
     this.router.navigate(['/menu/post'])
   }
+
+  /*doSearch(){
+    this.docteurService.getDocteurs()
+        .subscribe(data=>{
+          data[''].forEach(image=>{
+            this.dataMedecins.push(image);
+          });
+          this.lesMedecins = data;
+          this.totalPages = this.dataMedecins.length/this.size;
+        },error=>{
+          console.log(error);
+        });
+  }
+
+  loadData(event) {
+    if (this.currentPage < this.totalPages){
+      console.log(this.currentPage + "/" + this.totalPages);
+      ++this.currentPage;
+      this.doSearch();
+      event.target.complete();
+    }
+    if (this.currentPage>=this.totalPages)
+      event.target.disabled = true;
+  }*/
 }

@@ -59,6 +59,6 @@ export class PostPage implements OnInit {
 
   commentPost(currentPost: PostPayload) {
     this.postService.currentPost = currentPost;
-    this.router.navigateByUrl('/admin-menu/comment-post').then(r => PostPageModule);
+    this.router.navigateByUrl('/menu/comment-post').then(r => PostPageModule);
   }
 }

@@ -18,7 +18,7 @@ export class AuthentificationService {
   public message: string;
   public userOnline : string;
   public autorisation : string;
-  public currentProfile: PatientProfileModel;
+  public currentProfile: any;
 
   constructor(private router: Router, public http: HttpClient) { }
 
@@ -39,7 +39,7 @@ export class AuthentificationService {
             console.log('Username : '+ res.body.data.username);
             this.message = '';
             if(res.body.data.authorities[0].authority === 'ROLE_ADMIN'){
-              this.router.navigateByUrl('/admin-menu/admin-post').then(r => AddPostPageModule);
+              this.router.navigateByUrl('/admin-menu/admin-home').then(r => AddPostPageModule);
               //alert('ADMIN');
             }
             if(res.body.data.authorities[0].authority === 'ROLE_USER'){
@@ -73,6 +73,9 @@ export class AuthentificationService {
     return this.http.get<any>(this.REST_API_SERVER + '/getUtilisateur/'+userName,{observe:'response'});
   }
 
+  requestAdminProfile(userName: string){
+    return this.http.get<any>(this.REST_API_SERVER + '/getAdmin/'+userName,{observe:'response'});
+  }
 
   saveToken(jwt){
     localStorage.setItem('token', jwt.accessToken);

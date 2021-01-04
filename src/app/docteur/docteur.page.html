@@ -38,8 +38,6 @@
         <form #form="ngForm" style="display: inline-block">
             <bar-rating name="rating" (ratechange)="onRate(currentDocteur)" [rate]="formRating" [theme]="'stars'" [(ngModel)]="formRating" [max]="5" [titles]="['Bad', 'Mediocre' , 'Good', 'Awesome', 'Ok']"></bar-rating>
         </form>
-        <pre>{{ formRating }}</pre>
-        <p>form is valid: {{ form.valid ? 'true' : 'false' }}</p>
   </center>
 
 

@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {AuthentificationService} from '../services/authentification.service';
 import {LoginPageModule} from '../login/login.module';
 import {ProfilePageModule} from '../profile/profile.module';
+import {AdminProfileModel} from '../model/AdminProfile.model';
 
 @Component({
   selector: 'app-admin-menu',
@@ -11,14 +12,10 @@ import {ProfilePageModule} from '../profile/profile.module';
   styleUrls: ['./admin-menu.page.scss'],
 })
 export class AdminMenuPage implements OnInit {
-
-  private REST_API_SERVER = 'http://localhost:8080';
-
-  public imgBG = '../assets/images/medecine.jpg';
-  public imgUser = '../assets/images/user.png';
   public userName : string;
   darkmode : boolean = true;
-  public PatientProfile : PatientProfileModel = {
+  format = 'data:image/jpeg;base64,';
+  public AdminProfile : AdminProfileModel = {
     id : 0,
     prenom: '',
     nom: '',
@@ -31,42 +28,49 @@ export class AdminMenuPage implements OnInit {
   };
 
   public pages = [
-    {title : 'Home', url: '/admin-menu/admin-home', icon:'home-outline'},
-    {title : 'RDV', url: '/admin-menu/rdvTab', icon: 'calendar-outline'},
-    {title : 'URG', url: '/admin-menu/urgenceTab', icon: 'fitness-outline'},
+    {title : 'Accueil', url: '/admin-menu/admin-home', icon:'home-outline'},
+    {title : 'RDV', url: '/admin-menu/admin-rdv-tab', icon: 'calendar-outline'},
+    {title : 'Blog', url: '/admin-menu/admin-post', icon: 'chatbubble-ellipses-outline'},
+    {title : 'Contact', url: '/admin-menu/contact', icon: 'people-outline'},
     {title : 'Déconnexion', url: 'logout', icon: 'log-out-outline'}
   ];
 
-  constructor(private router: Router, private authService: AuthentificationService) {
+  constructor(private router: Router,
+              private authService: AuthentificationService) {
     this.userName = localStorage.getItem('username');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkmode = prefersDark.matches;
     //console.log('Le nom User : '+this.userName);
+  }
+
+  changeTheme(){
+    //const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.darkmode = ! this.darkmode;
+    document.body.classList.toggle('dark');
   }
 
   ngOnInit() {
   }
 
   ionViewWillEnter(){
-    this.getUserProfile();
+    this.getAdminProfile();
   }
 
-  getUserProfile(){
-    this.authService.requestUserProfile(this.userName)
+  getAdminProfile(){
+    this.authService.requestAdminProfile(this.userName)
         .subscribe(res=>{
               if(res.body.status !== 'error'){
-                console.log('Données utilisateurs : ' + res.body);
-                console.log('ID : ' + res.body.data.id);
-                console.log('Prenom : ' + res.body.data.prenom);
-                this.PatientProfile.id = res.body.data.id;
-                this.PatientProfile.prenom = res.body.data.prenom;
-                this.PatientProfile.nom = res.body.data.nom;
-                this.PatientProfile.dateNaiss = res.body.data.date;
-                this.PatientProfile.adresse = res.body.data.adresse;
-                this.PatientProfile.tel = res.body.data.tel;
-                this.PatientProfile.email = res.body.data.email;
-                this.PatientProfile.groupeSanguin = res.body.data.groupeSanguin;
-                this.PatientProfile.username = res.body.data.username;
-                this.PatientProfile.password = res.body.data.password;
-                this.PatientProfile.photo = res.body.data.photo;
+                this.AdminProfile.id = res.body.data.id;
+                this.AdminProfile.prenom = res.body.data.prenom;
+                this.AdminProfile.nom = res.body.data.nom;
+                this.AdminProfile.dateNaiss = res.body.data.date;
+                this.AdminProfile.adresse = res.body.data.adresse;
+                this.AdminProfile.tel = res.body.data.tel;
+                this.AdminProfile.email = res.body.data.email;
+                this.AdminProfile.groupeSanguin = res.body.data.groupeSanguin;
+                this.AdminProfile.username = res.body.data.username;
+                this.AdminProfile.password = res.body.data.password;
+                this.AdminProfile.photo = res.body.data.photo;
               }
             },error=>{
               console.log(error);
@@ -83,7 +87,7 @@ export class AdminMenuPage implements OnInit {
     }
   }
 
-  onProfilePage(profile: PatientProfileModel) {
+  onProfilePage(profile: AdminProfileModel) {
     console.log('Click_Profile : '+ profile.username);
     this.authService.currentProfile = profile;
     this.router.navigate(['profile']).then(r => ProfilePageModule);

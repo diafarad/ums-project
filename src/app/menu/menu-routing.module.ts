@@ -48,6 +48,10 @@ const routes: Routes = [
         path: 'post',
         loadChildren: () => import('../post/post.module').then( m => m.PostPageModule)
       },
+      {
+        path: 'comment-post',
+        loadChildren: () => import('../comment-post/comment-post.module').then( m => m.CommentPostPageModule)
+      },
     ]
   }
 ];

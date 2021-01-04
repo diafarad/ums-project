@@ -8,5 +8,46 @@
 </ion-header>
 
 <ion-content>
+  <center>
+    <h3 style="margin: 40px 15px 0 15px; text-align: center; font-family: 'Bookman Old Style'; font-weight: bold;">Laissez-nous un message</h3>
+  </center>
+      <!-- form goes here -->
+      <form (ngSubmit)="processForm()">
+        <!-- name -->
+        <ion-card-content>
+        <ion-label>Nom</ion-label>
+
+          <ion-input style="border-bottom: 1px ridge grey; margin-bottom: 10px"
+                  type="text"
+                  name="name"
+                  placeholder="Votre nom"
+                  [(ngModel)]="name"
+                  required
+                  minlength="3"
+                  #nameInput="ngModel"></ion-input>
+        <!-- email -->
+        <ion-label>Email</ion-label>
+
+          <ion-input style="border-bottom: 1px ridge grey; margin-bottom: 10px"
+                  type="email"
+                  name="email"
+                  placeholder="Votre mail"
+                  [(ngModel)]="email"
+                  required
+                  email
+                  #emailInput="ngModel"></ion-input>
+
+        <!-- message -->
+        <ion-label>Votre message</ion-label>
+                  <ion-textarea style="border-bottom: 1px ridge grey; min-height: 120px"
+                  name="message"
+                  placeholder="Votre message..."
+                  [(ngModel)]="message"
+                  required
+                  #messageInput="ngModel"></ion-textarea>
+
+          <ion-button style="float: right" type="submit">Envoyer</ion-button>
+        </ion-card-content>
+      </form>
 
 </ion-content>

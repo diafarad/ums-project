@@ -3,6 +3,10 @@ import {PostService} from '../services/post.service';
 import {RateDoctorPageModule} from '../rate-doctor/rate-doctor.module';
 import {Router} from '@angular/router';
 import {PostPageModule} from '../post/post.module';
+import {PostPayload} from '../model/PostPayload';
+import {PopoverController} from '@ionic/angular';
+import {AccueilPage} from '../accueil/accueil.page';
+import {PopoverComponent} from '../popover/popover.component';
 
 @Component({
   selector: 'app-admin-post',
@@ -12,10 +16,12 @@ import {PostPageModule} from '../post/post.module';
 export class AdminPostPage implements OnInit {
 
   private lesPosts : any ;
+  img = '../assets/images/ta.jpg';
   format = 'data:image/jpeg;base64,';
 
   constructor(private postService: PostService,
-              private router: Router) {
+              private router: Router,
+              private popOver: PopoverController) {
     this.getAllPost();
   }
 
@@ -42,8 +48,23 @@ export class AdminPostPage implements OnInit {
       return dd+'/'+mm+'/'+yyyy;
   }
 
-  onPostCheck(m: any) {
+  onPostCheck(m: PostPayload) {
       this.postService.currentPost = m;
-      this.router.navigateByUrl('/admin-menu/post').then(r => PostPageModule);
+      this.router.navigate(['/admin-menu/post']);
   }
+
+    async onOptionsPostCheck(ev,m: PostPayload) {
+        const popover = await this.popOver.create({
+            component: PopoverComponent,
+            cssClass: 'my-custom-class',
+            event : ev,
+            componentProps:{'ok' : 'yes'},
+            translucent: true
+        });
+        return await popover.present();
+    }
+
+    onAddPost() {
+        this.router.navigateByUrl('/admin-menu/add-post')
+    }
 }

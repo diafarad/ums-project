@@ -115,6 +115,14 @@ const routes: Routes = [
     path: 'comment-post',
     loadChildren: () => import('./comment-post/comment-post.module').then( m => m.CommentPostPageModule)
   },
+  {
+    path: 'admin-rdv-tab',
+    loadChildren: () => import('./admin-rdv-tab/admin-rdv-tab.module').then( m => m.AdminRdvTabPageModule)
+  },
+  {
+    path: 'admin-detail-rdv',
+    loadChildren: () => import('./admin-detail-rdv/admin-detail-rdv.module').then( m => m.AdminDetailRdvPageModule)
+  },
 ];
 
 @NgModule({

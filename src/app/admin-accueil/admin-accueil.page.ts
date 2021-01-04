@@ -13,6 +13,7 @@ import {NewDocteurPageModule} from '../new-docteur/new-docteur.module';
 export class AdminAccueilPage implements OnInit {
 
   private lesMedecins : any ;
+  img = '../assets/images/team_med.jpg';
   format = 'data:image/jpeg;base64,';
 
   constructor(private docteurService : DocteurService,

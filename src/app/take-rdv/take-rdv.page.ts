@@ -66,41 +66,48 @@ export class TakeRDVPage implements OnInit {
       //alert(this.dateRV); // the statement you might think about
   }
 
-  async onTakeRdv() {
+ onTakeRdv() {
     /*alert('Date '+this.rdv.dateRdv);
     alert('ID doc '+this.checkDocteur.id);
     alert('ID Pat '+this.rdv.idPatient);*/
     this.rdv.idMedecin = this.checkDocteur.id;
-    this.docteurService.rdv(this.rdv);
-    let ok = localStorage.getItem('ok');
-    if (ok === 'ok'){
-      this.msg = 'Votre rendez-vous a été prise en charge. ' +
-          'Nous vous contacterons dans les plus brefs délais pour confirmation.';
-    }else {
-      this.msg = 'Oups! une petite erreur est survenue. Veuillez réessayer plutard. ' +
-                  'Assurez de sélectionner une date valide.';
-    }
-
-    const alert = await this.alertController.create({
-      header: 'Votre rendez-vous',
-      mode: 'ios',
-      message: this.msg,
-      buttons: [
-        {
-          text: 'OK',
-          handler: () => {
-            this.removeItem();
+    this.docteurService.takeRdv(this.rdv).subscribe(res => {
+          if(res.body.status !== 'error'){
+            this.alertController.create({
+              header: 'Votre rendez-vous',
+              mode: 'ios',
+              message: 'Votre rendez-vous a été prise en charge. ' +
+                  'Nous vous contacterons dans les plus brefs délais pour confirmation.',
+              buttons: [
+                {
+                  text: 'OK'
+                }
+              ]
+            }).then(res => {
+              res.present();
+            });
           }
-        }
-      ]
-    });
-    await alert.present();
-    this.removeItem();
+          else{
+            this.alertController.create({
+              header: 'Votre rendez-vous',
+              mode: 'ios',
+              message: 'Oups! une petite erreur est survenue. Veuillez réessayer plutard. ' +
+                  'Assurez de sélectionner une date valide.',
+              buttons: [
+                {
+                  text: 'OK'
+                }
+              ]
+            }).then(res => {
+              res.present();
+            });
+          }
+        },
+        err => {
+          console.log(err);
+        });
   }
 
-  removeItem(){
-    localStorage.removeItem('ok');
-  }
 
   getIdUser(){
     this.authService.requestUserProfile(this.userName)

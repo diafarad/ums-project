@@ -1,19 +1,21 @@
 <ion-menu contentId="content">
   <ion-header>
-    <ion-toolbar color="primary">
-      <ion-title>MENU ADMIN</ion-title>
+    <ion-toolbar>
+      <ion-title>Admin MENU</ion-title>
+      <ion-icon slot="end" name="contrast-outline"></ion-icon>
+      <ion-toggle slot="end" [ngModel]="darkmode" (ionChange)="changeTheme()"></ion-toggle>
     </ion-toolbar>
+    <div class="module lr" (click)="onProfilePage(AdminProfile)">
+      <center style="margin-top: 50px">
+        <ion-avatar>
+          <ion-img class="imgpic" src="{{format+AdminProfile.photo}}"></ion-img>
+        </ion-avatar>
+      </center>
+      <p slot="start">{{AdminProfile.prenom}} {{AdminProfile.nom}}</p>
+    </div>
   </ion-header>
 
   <ion-content>
-    <div *ngIf="PatientProfile" class="bgmenu" (click)="onProfilePage(PatientProfile)">
-      <center>
-        <ion-avatar>
-          <ion-img class="userimg" src=""></ion-img>
-        </ion-avatar>
-        <ion-label class="userTxt">{{PatientProfile.prenom}} {{PatientProfile.nom}}</ion-label>
-      </center>
-    </div>
     <ion-menu-toggle autoHide=" " *ngFor="let p of pages">
       <ion-item (click)="onMenuAction(p)">
         <ion-icon [name]="p.icon" slot="start"></ion-icon>
